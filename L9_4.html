@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Тюлячкина Мария</title>
+<style>
+  #rotatingDiv {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(132, 0, 255);
+    position: absolute;
+    transform-origin: center center; 
+  }
+</style>
+</head>
+<body>
+<div id="rotatingDiv"></div>
+<script>
+  const rotatingDiv = document.getElementById('rotatingDiv');
+  let angle = 0;
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  const radius = 100;
+  document.addEventListener('mousemove', (event) => {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+  });
+  function rotateDiv() {
+    const x = mouseX + radius * Math.cos(angle * Math.PI / 180);
+    const y = mouseY + radius * Math.sin(angle * Math.PI / 180);
+
+    rotatingDiv.style.left = `${x}px`;
+    rotatingDiv.style.top = `${y}px`;
+    angle = (angle + 2) % 360; 
+    requestAnimationFrame(rotateDiv);
+  }
+  requestAnimationFrame(rotateDiv);
+</script>
+</body>
+</html>

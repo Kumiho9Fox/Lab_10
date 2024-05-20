@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тюлячкина Мария</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .toolbar {
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-bottom: 2px solid #ccc;
+        }
+        #url {
+            width: 400px;
+        }
+        iframe {
+            width: 100%;
+            height: calc(100% - 60px);
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <input type="text" id="url" placeholder="Введите URL и нажмите Enter" onkeypress="if(event.keyCode==13) loadPage();">
+        <button onclick="loadPage()">Перейти</button>
+        <button onclick="goBack()">Назад</button>
+        <button onclick="goForward()">Вперед</button>
+        <button onclick="reloadPage()">Перезагрузить</button>
+        <label><input type="checkbox" id="newWindowCheck"> Открыть в новом окне</label>
+    </div>
+    <iframe id="browserFrame"></iframe>
+    <script>
+        const browserFrame = document.getElementById('browserFrame');
+        function loadPage() {
+            const url = document.getElementById('url').value;
+            const openInNewWindow = document.getElementById('newWindowCheck').checked;
+            if (openInNewWindow) {
+                window.open(url, '_blank');
+            } else {
+                browserFrame.src = url;
+            }
+        }
+        function goBack() {
+            browserFrame.contentWindow.history.back();
+        }
+        function goForward() {
+            browserFrame.contentWindow.history.forward();
+        }
+        function reloadPage() {
+            browserFrame.contentWindow.location.reload();
+        }
+    </script>
+</body>
+</html>

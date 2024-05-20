@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тюлячкина Мария</title>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #magicButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button id="magicButton">Наведи на меня</button>
+    <script>
+        const button = document.getElementById('magicButton');
+        const body = document.body;
+        button.addEventListener('mouseenter', function() {
+            button.style.display = 'none';
+            setTimeout(() => {
+                button.style.display = 'block';
+                const maxX = body.clientWidth - button.clientWidth;
+                const maxY = body.clientHeight - button.clientHeight;
+                const randomX = Math.random() * maxX;
+                const randomY = Math.random() * maxY;
+                
+                button.style.position = 'absolute';
+                button.style.left = randomX + 'px';
+                button.style.top = randomY + 'px';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
